@@ -32,23 +32,57 @@ public class Driver
 	public static void main(String[] args) 
 	{
 		Customer jo = new Customer("jo", "geter", "Hodge Drive");
-		System.out.println(jo.getAddress());
-		jo.setAddress("Back Home");
-		System.out.println(jo.getAddress());
-		System.out.println(jo.toString());
-		
 		Driver.itemGenerator();
-		System.out.println(Driver.listMenu());
-		Driver.menuPick(jo);
 		
-		jo.addItem(menu.get(0));
-		jo.addItem(menu.get(3));
-		System.out.println(jo.viewCart());
-		jo.removeItem(menu.get(3));
-		System.out.println(jo.getTotal());
-		System.out.println(jo.viewCart());
-		jo.flushCart();
-
+		Scanner scan = new Scanner(System.in);
+		int input;
+		boolean running = true;
+		
+		
+		while(running)
+		{
+		System.out.println("Welcome to Menu:" + "\n"
+		+ "To view Profile Press 1:" + "\n"
+			+ "To view Cart Press 2:" + "\n"
+		+ "To see Total Press 3:" + "\n"
+			+ "To add Item Press 4:" + "\n"
+		+ "To Remove Item Press 5:" + "\n"
+			+ "To Flush Cart Press 6:" + "\n"
+		+ "To Exit Press 0:");
+		
+			input = scan.nextInt();
+			switch(input)
+			{
+				case 1 : System.out.println(jo.toString()); break;
+				case 2 : System.out.println(jo.viewCart()); break;
+				case 3 : System.out.println(jo.getTotal()); break;
+				case 4 : System.out.println(Driver.listMenu());
+				input = scan.nextInt();
+					if(input == 0)
+						jo.addItem(menu.get(0));
+					else if(input == 1)
+						jo.addItem(menu.get(1));
+					else if(input == 2)
+						jo.addItem(menu.get(2));
+					else if(input == 3)
+						jo.addItem(menu.get(3));
+					break;
+				case 5 : System.out.println(jo.viewCart());
+				input = scan.nextInt();
+					if(input == 0)
+					jo.removeItem(menu.get(0));
+					else if(input == 1)
+						jo.removeItem(menu.get(1));
+					else if(input == 2)
+						jo.removeItem(menu.get(2));
+					else if(input == 3)
+						jo.removeItem(menu.get(3));
+					break;
+				case 6 : jo.flushCart(); break;
+				case 0 : scan.close(); running = false; System.out.println("Goodbye"); break;
+				default : System.out.println("Please enter accepted answers"); 
+			}
+		}
 	}
 
 }
